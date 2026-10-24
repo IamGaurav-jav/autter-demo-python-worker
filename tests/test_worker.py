@@ -12,7 +12,6 @@ def test_submit_job():
     assert submit_job("org_a", "llm", {"text": "hi"}).status == "queued"
 
 
-@pytest.mark.xfail(reason="planted sandbox bug")
 def test_idempotency_key_reuses_job():
     a = submit_job("org_a", "llm", {}, "k1")
     b = submit_job("org_a", "llm", {}, "k1")

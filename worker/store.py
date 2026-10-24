@@ -20,6 +20,10 @@ jobs: list[Job] = []
 
 
 def submit_job(org_id, kind, payload, idempotency_key=None):
+    if idempotency_key:
+        for existing in jobs:
+            if existing.idempotency_key == idempotency_key:
+                return existing
     job = Job(
         id=str(uuid.uuid4()),
         org_id=org_id,
